@@ -4,10 +4,12 @@ from datetime import datetime, timedelta
 
 from django.db import models
 from django.conf import settings
-try:
+try:    # sbroumley 4/19/2016 - updated to dynamic setting
     from account import models as auth
+    from account import get_user_model
 except:
     from django.contrib.auth import models as auth
+    from django.contrib.auth import get_user_model
 from locking import logger
 import managers
 
@@ -38,7 +40,7 @@ class Lock(models.Model):
 
     entry_id = models.PositiveIntegerField(db_index=True)
 
-    _locked_by = models.ForeignKey(auth.User,
+    _locked_by = models.ForeignKey(settings.AUTH_USER_MODEL,    # sbroumley 4/19/2016 - updated to dynamic setting
         db_column='locked_by',
         related_name="working_on_%(class)s",
         null=True,
@@ -129,8 +131,8 @@ class Lock(models.Model):
         """
         logger.debug("Attempting to initiate a lock for user `%s`" % user)
 
-        if not isinstance(user, auth.User):
-            raise ValueError("You should pass a valid auth.User to lock_for.")
+        if not isinstance(user, get_user_model()):  # sbroumley 4/19/2016 - updated to dynamic setting
+            raise ValueError("You should pass a valid auth.get_user_model() to lock_for.")
 
         if self.lock_applies_to(user):
             raise ObjectLockedError("This object is already locked by another"

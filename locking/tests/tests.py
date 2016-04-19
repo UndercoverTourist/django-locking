@@ -3,7 +3,7 @@ import simplejson
 
 from django.core.urlresolvers import reverse
 from django.test.client import Client
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model  # sbroumley 4/19/2016 - updated to dynamic setting
 
 from locking import models, views, LOCK_TIMEOUT
 from locking.tests.utils import TestCase
@@ -14,7 +14,7 @@ class AppTestCase(TestCase):
 
     def setUp(self):
         self.alt_story, self.story = testmodels.Story.objects.all()
-        users = User.objects.all()
+        users = get_user_model().objects.all()  # sbroumley 4/19/2016 - updated to dynamic setting
         self.user, self.alt_user = users
     
     def test_hard_lock(self):
@@ -196,7 +196,7 @@ class BrowserTestCase(TestCase):
     def setUp(self):
         # some objects we might use directly, instead of via the client
         self.story = story = testmodels.Story.objects.all()[0]
-        user_objs = User.objects.all()
+        user_objs = get_user_model().objects.all()  # sbroumley 4/19/2016 - updated to dynamic setting
         self.user, self.alt_user = user_objs
         # client setup
         self.c = Client()
