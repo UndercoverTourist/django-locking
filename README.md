@@ -1,4 +1,14 @@
 =======================================
+Fork
+=======================================
+
+This fork has been updated with the following:
+
+* Compatible with Django 1.8 and greater.
+* Remove annoying prompt to save when lock expires
+* Improved lock messages display
+
+=======================================
 Concurrency control with django-locking
 =======================================
 
@@ -22,17 +32,17 @@ Changes on change list pages
 Unlock content object from change list page by simply clicking on the lock icon
 _______________________________________________________________________________
 
-![unlock prompt](https://github.com/RobCombs/django-locking/raw/master/docs/screenshots/unlock_prompt.png)
+![unlock prompt](https://github.com/UndercoverTourist/django-locking/raw/master/docs/screenshots/unlock_prompt.png)
 
 Hover over the lock icon to see when the lock expires
 _____________________________________________________
 
-![expire status](https://github.com/RobCombs/django-locking/raw/master/docs/screenshots/expire_status.png)
+![expire status](https://github.com/UndercoverTourist/django-locking/raw/master/docs/screenshots/expire_status.png)
 
 Hover over the username by the lock icon to see the full name of the person who has locked the content object 
 _____________________________________________________________________________________________________________
 
-![lock_by_who](https://github.com/RobCombs/django-locking/raw/master/docs/screenshots/lock_by_who.png)
+![lock_by_who](https://github.com/UndercoverTourist/django-locking/raw/master/docs/screenshots/lock_by_who.png)
 
 
 Consolidated username and lock icon into one column on change list page
@@ -46,7 +56,7 @@ Lock messages:
 
 Added options to reload or save the object when lock expiration message is shown
 
-![reload or bust](https://github.com/RobCombs/django-locking/raw/master/docs/screenshots/reload_or_bust.png)
+![reload or bust](https://github.com/UndercoverTourist/django-locking/raw/master/docs/screenshots/reload_or_bust.png)
 
 Improved look and feel for the lock messages
 Lock messages fade in and out seamlessly
@@ -59,12 +69,12 @@ Locking:
 
  Added hard locking support using Django's validation framework
 
-![hard lock](https://github.com/RobCombs/django-locking/raw/master/docs/screenshots/hard_lock.png)
+![hard lock](https://github.com/UndercoverTourist/django-locking/raw/master/docs/screenshots/hard_lock.png)
 
  Set hard and soft locking as the default to ensure the integrity of locking
  Added seamless unlocking when lock expires
 
-![auto unlock](https://github.com/RobCombs/django-locking/raw/master/docs/screenshots/auto_unlock.png)
+![auto unlock](https://github.com/UndercoverTourist/django-locking/raw/master/docs/screenshots/auto_unlock.png)
 
 
 Architecture:
@@ -78,42 +88,37 @@ Refactored and cleaned up code for easier maintainability
 10 Minute Install
 -----------------
 
-1) Get the code:
+1) Install from PyPI
 
-    git clone git@github.com:RobCombs/django-locking.git
+    pip install django-locking
 
-2) Install the django-locking python egg:
-    
-    cd django-locking
-    sudo python setup.py install
-
-3) Add locking to the list of INSTALLED_APPS in project settings file:
+2) Add locking to the list of INSTALLED_APPS in project settings file:
 
     INSTALLED_APPS = ('locking',)
     
-4) Add the following url mapping to your urls.py file:
+3) Add the following url mapping to your urls.py file:
 
     urlpatterns = patterns('',
     (r'^admin/ajax/', include('locking.urls')),
     )
 
-5) Add locking to the admin files that you want locking for:
+4) Add locking to the admin files that you want locking for:
 
     from locking.admin import LockableAdmin
     class YourAdmin(LockableAdmin):
        list_display = ('get_lock_for_admin')
 
-6) Add warning and expiration time outs to your Django settings file:
+5) Add warning and expiration time outs to your Django settings file:
 
     LOCKING = {'time_until_expiration': 120, 'time_until_warning': 60}
 
 
-7) Build the Lock table in the database:
+6) Build the Lock table in the database:
 
     django-admin.py/manage.py migrate locking (For south users. Recommended approach) OR
     django-admin.py/manage.py syncdb (For non south users)
 
-8) Install django-locking media:
+7) Install django-locking media:
 
     cp -r django-locking/locking/media/locking $your static media directory
 
@@ -191,6 +196,7 @@ CREDIT
 ------
 This code is basically a composition of the following repos with a taste of detailed descretion from me. Credit goes out to the following authors and repos for their contributions
 and my job for funding this project:
+https://github.com/RobCombs/django-locking
 https://github.com/stdbrouw/django-locking
 https://github.com/runekaagaard/django-locking
 https://github.com/theatlantic/django-locking
