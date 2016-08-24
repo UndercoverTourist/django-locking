@@ -1,9 +1,6 @@
 # encoding: utf-8
 
 from django.http import HttpResponse
-from django.contrib.contenttypes.models import ContentType
-
-from locking.models import Lock
 from locking import logger
 
 def user_may_change_model(fn):
@@ -13,7 +10,7 @@ def user_may_change_model(fn):
             return HttpResponse(status=401)
         else:
             return fn(request, app, model, *vargs, **kwargs)
-            
+
     return view
 
 def is_lockable(fn):
@@ -26,5 +23,5 @@ def log(view):
         response = view(*vargs, **kwargs)
         logger.debug("Sending a request: \n\t%s" % (response.content))
         return response
-    
+
     return decorated_view
