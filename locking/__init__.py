@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 VERSION = (0, 3, 0)
 
 from django.conf import settings

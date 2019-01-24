@@ -3,6 +3,7 @@
 Forms class for the django-locking project.
 
 """
+from __future__ import absolute_import
 from django import forms
 from django.contrib.contenttypes.models import ContentType
 
