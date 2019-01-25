@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from django.db.models import Q, Manager
 from locking import LOCK_TIMEOUT
 import datetime

@@ -1,4 +1,5 @@
-VERSION = (0, 3, 0)
+from __future__ import absolute_import
+VERSION = (0, 3, 3)
 
 from django.conf import settings
 import logging

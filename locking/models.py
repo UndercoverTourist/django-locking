@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+from __future__ import absolute_import
 from datetime import datetime, timedelta
 
 from django.db import models
@@ -11,7 +12,7 @@ except:
     from django.contrib.auth import models as auth
     from django.contrib.auth import get_user_model
 from locking import logger
-import managers
+from . import managers
 
 class ObjectLockedError(IOError):
     pass

@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from django.conf.urls import url
 import django.views.i18n
 from locking import views
