@@ -16,7 +16,7 @@ def user_may_change_model(fn):
 
 def is_lockable(fn):
     def view(request, app, model, *vargs, **kwargs):
-    	return fn(request, app, model, *vargs, **kwargs)
+        return fn(request, app, model, *vargs, **kwargs)
     return view
 
 def log(view):
