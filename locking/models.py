@@ -41,11 +41,14 @@ class Lock(models.Model):
 
     entry_id = models.PositiveIntegerField(db_index=True)
 
-    _locked_by = models.ForeignKey(settings.AUTH_USER_MODEL,    # sbroumley 4/19/2016 - updated to dynamic setting
+    _locked_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,    # sbroumley 4/19/2016 - updated to dynamic setting
         db_column='locked_by',
         related_name="working_on_%(class)s",
         null=True,
-        editable=False)
+        editable=False,
+        on_delete=models.CASCADE,    # ckim 3/24/2020 - updated for django 3
+    )
 
     _hard_lock = models.BooleanField(db_column='hard_lock', default=False,
                                      editable=False)

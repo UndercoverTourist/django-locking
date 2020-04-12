@@ -3,7 +3,7 @@ import simplejson
 
 from django.http import HttpResponse
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from locking.decorators import user_may_change_model, is_lockable, log
 from locking import utils, LOCK_TIMEOUT, logger
