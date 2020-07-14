@@ -222,7 +222,7 @@ locking.admin = function() {
                 });
             };
             request_lock();
-            $(window).unload(request_unlock);
+            $(window).on('unload', request_unlock);
         };
         
         // The server gave us locking info. Either lock or keep it unlocked
