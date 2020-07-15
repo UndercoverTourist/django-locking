@@ -13,14 +13,11 @@ from locking import LOCK_TIMEOUT, views
 from locking.models import Lock
 from locking import settings as _s
 
-# This is the last js from django admin.  Use this in class.Media.js so the django admin js files are loaded first
-LAST_ADMIN_JS_FILE = 'admin/js/vendor/xregexp/xregexp.js'
-
 class LockableAdmin(admin.ModelAdmin):
 
     class Media:
         js = (
-            _s.STATIC_URL + LAST_ADMIN_JS_FILE,
+            'admin/js/jquery.init.js',
             _s.STATIC_URL + 'locking/js/jquery.url.packed.js',
             _s.ADMIN_URL + "ajax/variables.js",
             _s.STATIC_URL + "locking/js/admin.locking.js?v=1"
