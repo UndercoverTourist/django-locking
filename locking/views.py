@@ -4,6 +4,7 @@ import simplejson
 from django.http import HttpResponse
 from django.conf import settings
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 
 from locking.decorators import user_may_change_model, is_lockable, log
 from locking import utils, LOCK_TIMEOUT, logger
@@ -41,6 +42,7 @@ def lock(request, app, model, id):
     else:
         return HttpResponse(status=200)
 
+@csrf_exempt
 @log
 @user_may_change_model
 @is_lockable

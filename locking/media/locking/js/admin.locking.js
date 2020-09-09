@@ -212,17 +212,12 @@ locking.admin = function() {
                 });
             };
             var request_unlock = function() {
-                // We have to assure that our unlock request actually gets
-                // through before the user leaves the page, so it shouldn't
-                // run asynchronously.
-                $.ajax({
-                    url: urls.unlock,
-                    async: false,
-                    cache: false
-                });
+                // We are using navigator.sendBeacon to allow the request to
+                // continue even if this page has been dismissed
+                navigator.sendBeacon(urls.unlock, '');
             };
             request_lock();
-            $(window).on('unload', request_unlock);
+            $(window).on('beforeunload', request_unlock);
         };
         
         // The server gave us locking info. Either lock or keep it unlocked
